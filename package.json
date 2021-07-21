@@ -1,0 +1,11 @@
+{
+  "name": "dtapi",
+  "version": "0.1.0",
+  "author": "DrPuc",
+  "license": "MIT",
+  "dependencies": {
+    "@tauri-apps/api": "^1.0.0-beta.5",
+    "webpack": "^5.45.1",
+    "webpack-cli": "^4.7.2"
+  }
+}
