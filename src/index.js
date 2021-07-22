@@ -1,8 +1,5 @@
 import WebpackModules from './util/webpack/webpackModules';
 import { patch } from './util/patcher/base.js';
-
-import * as notificationPlugin from './notifications.js';
-
 import { listen } from '@tauri-apps/api/event'
 
 const importsToAssign = {
@@ -12,16 +9,14 @@ const importsToAssign = {
 
 const init = async function () {
   Object.assign(this, importsToAssign);
-
-  // Request notification permission at the start
-  window.__TAURI__.notification.requestPermission();
-  notificationPlugin.init();
   
   await listen('DT-Exit', event => {
-    window.dtapi.patches.unPatchNotifications();
+    window.dtapi.patches.forEach(unpatch => {
+      unpatch();
+    });
   })
 }
 
 window.dtapi = {};
-window.dtapi.patches = {};
+window.dtapi.patches = [];
 init.bind(window.dtapi)();
