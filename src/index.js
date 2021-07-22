@@ -13,6 +13,8 @@ const importsToAssign = {
 const init = async function () {
   Object.assign(this, importsToAssign);
 
+  // Request notification permission at the start
+  window.__TAURI__.notification.requestPermission();
   notificationPlugin.init();
   
   await listen('DT-Exit', event => {
